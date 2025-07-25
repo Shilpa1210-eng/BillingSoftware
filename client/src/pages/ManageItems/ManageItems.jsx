@@ -1,8 +1,14 @@
+import './ManageItems.css';
+
 const ManageItems = () => {
   return (
-    <div className="container">
-      <h1 className="mt-4">Manage Items</h1>
-      <p>Here you can manage your items.</p>
+    <div className="items-container text-light">
+      <div className="left-column">
+        item form
+      </div>
+      <div className="right-column">
+        list of items
+      </div>
     </div>
   );
 }

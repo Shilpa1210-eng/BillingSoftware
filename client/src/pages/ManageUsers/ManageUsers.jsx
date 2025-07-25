@@ -1,8 +1,13 @@
+import './ManageUsers.css';
 const ManageUsers = () => {
   return (
-    <div className="container">
-      <h1 className="mt-4">Manage Users</h1>
-      <p>Here you can manage your users.</p>
+    <div className="users-container text-light">
+      <div className="left-column">
+        users form
+      </div>
+      <div className="right-column">
+        list of users
+      </div>
     </div>
   );
 }
