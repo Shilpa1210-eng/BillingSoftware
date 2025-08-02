@@ -1,6 +1,7 @@
-const CategoryForm = () => {
+const ItemForm = () => {
     return (
-        <div className="mx-2 mt-2">
+        <div className="item-form-container" style={ {height: '100vh', overflowY: 'auto',overflowX:'hidden'} } >
+            <div className="mx-2 mt-2">
             <div className="row">
                 <div className="card col-md-8 form-container">
                     <div className="card-body">
@@ -17,9 +18,27 @@ const CategoryForm = () => {
                                 name="name"
                                 id="name"
                                 className="form-control"
-                                placeholder="Category Name"
+                                placeholder="Item Name"
                                 />
-                                </div>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="category" className="form-label"></label>
+                                <select name="category" id="category" className="form-control">
+                                    <option value="">-- Select Category --</option>
+                                    <option value="1">Category 1</option>
+                                    <option value="2">Category 2</option>
+                                </select>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="price" className="form-label">
+                                    <input type="number"
+                                        name="price"
+                                        id="price"
+                                        className="form-control"
+                                        placeholder="&#8377;00.00"
+                                        />
+                                </label>
+                            </div>
                             <div className="mb-3">
                             <label htmlFor="description" className="form-label">Description</label>
                             <textarea
@@ -35,8 +54,8 @@ const CategoryForm = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        </div> 
+         </div>
+    )
 }
-
-export default CategoryForm;
+export default ItemForm;
