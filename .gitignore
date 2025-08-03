@@ -15,6 +15,7 @@ node_modules/
 build/
 dist/
 
-# Environment files
+### Environment Files ###
 .env
-.env.local"src/main/resources/application.properties" 
+.env.local
+.env.*.local
