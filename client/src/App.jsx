@@ -5,6 +5,7 @@ import Explore from './pages/Explore/Explore.jsx';
 import ManageItems from './pages/ManageItems/ManageItems.jsx';
 import ManageCategory from './pages/ManageCategory/ManageCategory.jsx';
 import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
+import OrderHistory from './pages/OrderHistory/OrderHistory.jsx';
 import { Toaster } from 'react-hot-toast';
 
 const App = () => {

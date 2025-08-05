@@ -1,3 +1,4 @@
+import './Menubar.css';
 import {assets} from '../../assets/assets.js';
 import { Link } from 'react-router-dom';
 
