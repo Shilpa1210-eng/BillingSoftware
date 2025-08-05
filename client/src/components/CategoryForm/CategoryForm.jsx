@@ -5,26 +5,21 @@ import {addCategory} from "../../Service/CategoryService.js";
 import {AppContext} from "../../context/AppContext.jsx";
 
 const CategoryForm = () => {
-    
     const {setCategories, categories} = useContext(AppContext);
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(false);
-    const[data, setData] = useState({
+
+    const [data, setData] = useState({
         name: "",
         description: "",
-        bgColor: "#2c2c2c"
+        bgColor: "#2c2c2c",
     });
-
-    useEffect(() => {
-        console.log('CategoryForm mounted');
-        // Fetch existing category data if needed
-    }, []);
 
     const onChangeHandler = (e) => {
         const value = e.target.value;
         const name = e.target.name;
-        setData((data) => ({...data, [name]: value }));
-    };
+        setData((data) => ({...data, [name]: value}));
+    }
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
@@ -56,7 +51,7 @@ const CategoryForm = () => {
             setLoading(false);
         }
     }
-    
+
     return (
         <div className="mx-2 mt-2">
             <div className="row">
@@ -65,12 +60,12 @@ const CategoryForm = () => {
                         <form onSubmit={onSubmitHandler}>
                             <div className="mb-3">
                                 <label htmlFor="image" className="form-label">
-                                    <img src={ image ? URL.createObjectURL(image) : assets.upload} alt="" width={48} />
+                                    <img src={image ? URL.createObjectURL(image) : assets.upload} alt="" width={48}/>
                                 </label>
-                                <input type="file" name="image" id="image" className='form-control' hidden onChange={(e) => setImage(e.target.files[0])}/>
+                                <input type="file" name="image" id="image" className='form-control' hidden onChange={(e) => setImage(e.target.files[0])} />
                             </div>
                             <div className="mb-3">
-                            <label htmlFor="name" className="form-label">Name</label>
+                                <label htmlFor="name" className="form-label">Name</label>
                                 <input type="text"
                                     name="name"
                                     id="name"
@@ -78,30 +73,31 @@ const CategoryForm = () => {
                                     placeholder="Category Name"
                                     onChange={onChangeHandler}
                                     value={data.name}
+                                    required
                                 />
-                                </div>
-                            <div className="mb-3">
-                            <label htmlFor="description" className="form-label">Description</label>
-                            <textarea
-                                rows="5"
-                                name="description"
-                                id="description"
-                                className="form-control"
-                                placeholder="Write description here...."
-                                onChange={onChangeHandler}
-                                value={data.description}
-                            />
-
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="bgColor" className="form-label">Background Color</label>
+                                <label htmlFor="description" className="form-label">Description</label>
+                                <textarea
+                                        rows="5"
+                                       name="description"
+                                       id="description"
+                                       className="form-control"
+                                       placeholder="Write content here.."
+                                        onChange={onChangeHandler}
+                                        value={data.description}
+                                ></textarea>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="bgcolor" className="form-label">Background color</label>
+                                <br/>
                                 <input type="color"
-                                    name="bgColor"
-                                    id="bgColor"
-                                    placeholder="#ffffff"
-                                    onChange={onChangeHandler}
-                                    value={data.bgColor}
-                            />
+                                       name="bgColor"
+                                       id="bgcolor"
+                                       onChange={onChangeHandler}
+                                       value={data.bgColor}
+                                       placeholder="#ffffff"
+                                />
                             </div>
                             <button type="submit"
                                     disabled={loading}
@@ -111,7 +107,7 @@ const CategoryForm = () => {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 export default CategoryForm;
