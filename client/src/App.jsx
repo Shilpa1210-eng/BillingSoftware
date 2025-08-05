@@ -10,6 +10,7 @@ import Login from "./pages/Login/Login.jsx";
 import OrderHistory from "./pages/OrderHistory/OrderHistory.jsx";
 import {useContext} from "react";
 import {AppContext} from "./context/AppContext.jsx";
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 const App = () => {
     const location = useLocation();
@@ -49,6 +50,7 @@ const App = () => {
                 <Route path="/login" element={<LoginRoute element={<Login />} />} />
                 <Route path="/orders" element={<OrderHistory />} />
                 <Route path="/" element={<Login />} />
+                <Route path="*" element={<NotFound />} />
 
             </Routes>
         </div>
