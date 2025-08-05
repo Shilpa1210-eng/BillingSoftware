@@ -20,6 +20,7 @@ const App = () => {
             <Route path="/items" element={<ManageItems />} />
             <Route path="/category" element={<ManageCategory />} />
             <Route path="/users" element={<ManageUsers />} />
+            <Route path="/orders" element={<OrderHistory />} /> 
           </Routes>
         </div>
     </>
