@@ -12,7 +12,20 @@ const CustomerForm = ({customerName, mobileNumber, setMobileNumber, setCustomerN
             <div className="mb-3">
                 <div className="d-flex align-items-center gap-2">
                     <label htmlFor="mobileNumber" className="col-4">Mobile number</label>
-                    <input type="text" className="form-control form-control-sm" id="mobileNumber" onChange={(e) => setMobileNumber(e.target.value)} value={mobileNumber} required />
+                    <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    id="mobileNumber"
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        // Allow only digits, limit to 10
+                        if (/^\d{0,10}$/.test(value)) {
+                        setMobileNumber(value);
+                        }
+                    }}
+                    value={mobileNumber}
+                    required
+                    />
                 </div>
             </div>
         </div>

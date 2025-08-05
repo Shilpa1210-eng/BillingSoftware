@@ -14,7 +14,7 @@ const Login = () => {
         password: "",
     });
 
-    const onChangeHandler = (e) => { 
+    const onChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setData((data) => ({...data, [name]: value}));
@@ -29,9 +29,7 @@ const Login = () => {
                 toast.success("Login successfull");
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("role", response.data.role);
-                
                 setAuthData(response.data.token, response.data.role);
-                
                 navigate("/dashboard");
             }
         } catch (error) {
