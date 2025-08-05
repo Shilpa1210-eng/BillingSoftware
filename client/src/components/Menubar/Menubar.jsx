@@ -40,6 +40,7 @@ const Menubar = () => {
     </div>
 </nav>
   );
+
     const navigate = useNavigate();
     const location = useLocation();
     const {setAuthData, auth} = useContext(AppContext);

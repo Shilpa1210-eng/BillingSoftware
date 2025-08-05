@@ -41,6 +41,9 @@ export const AppContextProvider = (props) => {
 
             const response = await fetchCategories();
             const itemResponse = await fetchItems();
+            console.log('item response', itemResponse);
+            setCategories(response.data);
+            setItemsData(itemResponse.data);
 
             console.log('item response', itemResponse);
             setCategories(response.data);
