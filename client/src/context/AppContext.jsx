@@ -30,22 +30,32 @@ export const AppContextProvider = (props) => {
     }
 
     useEffect(() => {
-        async function loadData() {
+    async function loadData() {
+        try {
             if (localStorage.getItem("token") && localStorage.getItem("role")) {
                 setAuthData(
                     localStorage.getItem("token"),
                     localStorage.getItem("role")
                 );
             }
+
             const response = await fetchCategories();
             const itemResponse = await fetchItems();
             console.log('item response', itemResponse);
             setCategories(response.data);
             setItemsData(itemResponse.data);
 
+            console.log('item response', itemResponse);
+            setCategories(response.data);
+            setItemsData(itemResponse.data);
+        } catch (error) {
+            console.error("Error loading data:", error);
+            // Optionally set error state or show a message to the user
         }
-        loadData();
-    }, []);
+    }
+    loadData();
+}, []);
+
 
     const setAuthData = (token, role) => {
         setAuth({token, role});
