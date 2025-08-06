@@ -11,3 +11,9 @@ export const createOrder = async (order) => {
 export const deleteOrder = async (id) => {
     return await axios.delete(`http://localhost:8080/api/v1.0/orders/${id}`, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
 }
+
+export const getPaginatedOrders = async (page, size = 10) => {
+    return await axios.get(`http://localhost:8080/api/v1.0/orders/paginated?page=${page}&size=${size}`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    });
+};
