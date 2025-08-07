@@ -1,7 +1,5 @@
 package in.group.billingsoftware.service;
-import in.group.billingsoftware.io.OrderRequest;
-import in.group.billingsoftware.io.OrderResponse;
-import in.group.billingsoftware.io.PaymentVerificationRequest;
+import in.group.billingsoftware.io.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -25,5 +23,10 @@ public interface OrderService {
     List<OrderResponse> findRecentOrders();
 
     Page<OrderResponse> getPaginatedOrders(int page, int size);
+
+
+    List<MonthlySales> getMonthlySales(int year);
+
+    List<WeeklySales> getWeeklySales(int year);
 }
 

@@ -113,7 +113,7 @@ body {
 .chart-controls {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
 }
 
 .chart-controls select,
@@ -247,7 +247,88 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background-color: var(--scrollbar-hover);
 }
+.chart-card {
+    background: linear-gradient(135deg, #343a40 0%, #2c3136 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-height: 0;
+}
+.year-select {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #495057;
+    background-color: #343a40;
+    color: #f8f9fa;
+    height: 38px; /* Match button height */
+    box-sizing: border-box; /* Ensure padding is included in height */
+}
 
+.view-toggle {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+    gap: 2px; /* Gap between buttons */
+}
+
+.view-toggle button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #495057;
+    color: #f8f9fa;
+    cursor: pointer;
+    height: 38px; /* Explicit height to match select */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-toggle button.active {
+    background-color: #20c997;
+    color: #212529;
+}
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.chart-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.chart-container {
+    height: 400px;
+    width: 100%;
+    position: relative;
+}
+.view-toggle {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+    gap:5px;
+}
+.year-select {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #495057;
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+.view-toggle button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #495057;
+    color: #f8f9fa;
+    cursor: pointer;
+}
+
+.view-toggle button.active {
+    background-color: #20c997;
+    color: #212529;
+}
 /* Responsive */
 @media (max-width: 768px) {
     .stats-grid {
@@ -294,5 +375,8 @@ body {
         content: attr(data-label);
         font-weight: bold;
         flex: 1;
+    }
+    .chart-container {
+        height: 300px;
     }
 }

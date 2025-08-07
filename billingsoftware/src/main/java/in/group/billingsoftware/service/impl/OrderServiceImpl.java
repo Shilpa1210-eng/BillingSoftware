@@ -153,6 +153,35 @@ public class OrderServiceImpl implements OrderService {
         return orderPage.map(this::convertToResponse);
     }
 
+    private static final String[] MONTH_NAMES = {
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+    };
+
+    @Override
+    public List<MonthlySales> getMonthlySales(int year) {
+        List<Object[]> rawData = orderEntityRepository.getMonthlySalesData(year);
+        return rawData.stream()
+                .map(row -> {
+                    int monthIndex = ((Integer) row[0]) - 1;
+                    String monthName = MONTH_NAMES[monthIndex];
+                    Double total = ((Number) row[1]).doubleValue();
+                    return new MonthlySales(monthName, total);
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<WeeklySales> getWeeklySales(int year) {
+        List<Object[]> rawData = orderEntityRepository.getWeeklySalesData(year);
+        return rawData.stream()
+                .map(row -> {
+                    int weekNumber = (Integer) row[0];
+                    Double total = ((Number) row[1]).doubleValue();
+                    return new WeeklySales("Week " + weekNumber, total);
+                })
+                .collect(Collectors.toList());
+    }
     private boolean verifyRazorpaySignature(String razorpayOrderId, String razorpayPaymentId, String razorpaySignature) {
         return true;
     }

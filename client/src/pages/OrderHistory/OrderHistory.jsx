@@ -1,6 +1,5 @@
 import './OrderHistory.css';
 import {useEffect, useState} from "react";
-import {latestOrders} from "../../Service/OrderService.js";
 import { getPaginatedOrders } from "../../Service/OrderService.js";
 
 const OrderHistory = () => {
