@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -184,5 +186,66 @@ public class OrderServiceImpl implements OrderService {
     }
     private boolean verifyRazorpaySignature(String razorpayOrderId, String razorpayPaymentId, String razorpaySignature) {
         return true;
+    }
+
+    @Override
+    public Page<OrderResponse> getPaginatedOrders(int page, int size, LocalDate startDate, LocalDate endDate) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+
+        Page<OrderEntity> orderPage;
+        if (startDate != null && endDate != null) {
+            orderPage = orderEntityRepository.findByCreatedAtBetween(
+                    startDate.atStartOfDay(),
+                    endDate.atTime(23, 59, 59),
+                    pageable
+            );
+        } else {
+            orderPage = orderEntityRepository.findAll(pageable);
+        }
+
+        return orderPage.map(this::convertToResponse);
+    }
+
+    @Override
+    public byte[] exportOrdersToCSV(LocalDate startDate, LocalDate endDate) {
+        List<OrderEntity> orders;
+        if (startDate != null && endDate != null) {
+            orders = orderEntityRepository.findByCreatedAtBetween(
+                    startDate.atStartOfDay(),
+                    endDate.atTime(23, 59, 59)
+            );
+        } else {
+            orders = orderEntityRepository.findAll();
+        }
+
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream();
+             PrintWriter writer = new PrintWriter(out)) {
+
+            // Write CSV header
+            writer.println("Order ID,Customer Name,Phone Number,Items,Total,Payment Method,Status,Date");
+
+            // Write data
+            for (OrderEntity order : orders) {
+                String items = order.getItems().stream()
+                        .map(item -> item.getName() + " x " + item.getQuantity())
+                        .collect(Collectors.joining("; "));
+
+                writer.println(String.format("\"%s\",\"%s\",\"%s\",\"%s\",%.2f,\"%s\",\"%s\",\"%s\"",
+                        order.getOrderId(),
+                        order.getCustomerName(),
+                        order.getPhoneNumber(),
+                        items,
+                        order.getGrandTotal(),
+                        order.getPaymentMethod(),
+                        order.getPaymentDetails() != null ? order.getPaymentDetails().getStatus() : "PENDING",
+                        order.getCreatedAt()
+                ));
+            }
+
+            writer.flush();
+            return out.toByteArray();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to export orders to CSV", e);
+        }
     }
 }
