@@ -2,6 +2,7 @@ package in.group.billingsoftware.service;
 import in.group.billingsoftware.io.OrderRequest;
 import in.group.billingsoftware.io.OrderResponse;
 import in.group.billingsoftware.io.PaymentVerificationRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
@@ -22,5 +23,7 @@ public interface OrderService {
     Long countByOrderDate(LocalDate date);
 
     List<OrderResponse> findRecentOrders();
+
+    Page<OrderResponse> getPaginatedOrders(int page, int size);
 }
 

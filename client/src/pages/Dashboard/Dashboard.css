@@ -1,17 +1,17 @@
 /* Remove vertical scrollbar and set full height */
-body,
-html {
-    height: 100%;
-    overflow-y: hidden;
+html,
+body {
+    height: auto;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
 }
 
 .dashboard-wrapper {
     height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
-
 .dashboard-container {
     padding: 20px;
     background-color: #212529;
@@ -127,6 +127,23 @@ html {
     font-size: 1.2rem;
 }
 
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.chart-controls select,
+.chart-controls button {
+    padding: 5px 10px;
+    font-size: 14px;
+}
 @media (max-width: 768px) {
     .stats-grid {
         grid-template-columns: 1fr;
@@ -141,4 +158,45 @@ html {
         margin-right: 0;
         margin-bottom: 15px;
     }
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.chart-controls select,
+.chart-controls button {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+/* ===== Custom Scrollbar for Webkit Browsers ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #212529;
+    /* dark background */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #495057;
+    /* medium grey */
+    border-radius: 10px;
+    border: 2px solid #212529;
+    /* space around thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #868e96;
+    /* lighter on hover */
 }

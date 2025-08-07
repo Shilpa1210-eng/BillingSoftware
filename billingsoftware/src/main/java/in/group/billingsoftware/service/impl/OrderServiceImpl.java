@@ -6,8 +6,10 @@ import in.group.billingsoftware.io.*;
 import in.group.billingsoftware.repository.OrderEntityRepository;
 import in.group.billingsoftware.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
@@ -140,6 +142,15 @@ public class OrderServiceImpl implements OrderService {
                 .stream()
                 .map(orderEntity -> convertToResponse(orderEntity))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<OrderResponse> getPaginatedOrders(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        Page<OrderEntity> orderPage = orderEntityRepository.findAll(pageable);
+
+        // Convert Page<OrderEntity> → Page<OrderResponse>
+        return orderPage.map(this::convertToResponse);
     }
 
     private boolean verifyRazorpaySignature(String razorpayOrderId, String razorpayPaymentId, String razorpaySignature) {
