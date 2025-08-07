@@ -12,7 +12,5 @@ public class BillingsoftwareApplication {
 		Dotenv dotenv = Dotenv.configure().load();
 		dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));
 		SpringApplication.run(BillingsoftwareApplication.class, args);
-
 	}
-
 }
