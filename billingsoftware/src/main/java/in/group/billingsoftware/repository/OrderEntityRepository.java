@@ -1,5 +1,6 @@
 package in.group.billingsoftware.repository;
 import in.group.billingsoftware.entity.OrderEntity;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -7,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,24 @@ public interface OrderEntityRepository extends JpaRepository<OrderEntity, Long> 
 
     @Query("SELECT o FROM OrderEntity o ORDER BY o.createdAt DESC")
     List<OrderEntity> findRecentOrders(Pageable pageable);
+
+    @Query("SELECT FUNCTION('MONTH', o.createdAt) as month, SUM(o.grandTotal) as totalSales " +
+            "FROM OrderEntity o " +
+            "WHERE FUNCTION('YEAR', o.createdAt) = :year " +
+            "GROUP BY FUNCTION('MONTH', o.createdAt) " +
+            "ORDER BY FUNCTION('MONTH', o.createdAt)")
+    List<Object[]> getMonthlySalesData(@Param("year") int year);
+
+    @Query("SELECT FUNCTION('WEEK', o.createdAt) as week, SUM(o.grandTotal) as totalSales " +
+            "FROM OrderEntity o " +
+            "WHERE FUNCTION('YEAR', o.createdAt) = :year " +
+            "GROUP BY FUNCTION('WEEK', o.createdAt) " +
+            "ORDER BY FUNCTION('WEEK', o.createdAt)")
+    List<Object[]> getWeeklySalesData(@Param("year") int year);
+
+    Page<OrderEntity> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end, Pageable pageable);
+
+    List<OrderEntity> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 
 }
 
