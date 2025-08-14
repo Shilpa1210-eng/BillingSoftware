@@ -1,99 +1,184 @@
+ 
 .orders-history-container {
-    padding: 20px;
+    
+    --bg-card: #2c3335;
+    --bg-dark: #343a40;
+    --muted: #adb5bd;
+    --text: #f8f9fa;
+    --accent: #20c997;
+
+    padding: 2rem;
+    background-color: var(--bg-card);
+    color: var(--text);
+    min-height: 100vh;
     box-sizing: border-box;
-    background-color: #2c3335;
+    overflow-x: hidden;
 }
 
-.orders-history-container h2 {
-    color: #343a40;
-    font-weight: 600;
+ 
+.orders-history-container label {
+    font-weight: 500;
+    color: var(--text);
 }
 
-.table {
-    margin-top: 20px;
+ 
+.orders-history-container .row.mb-3 {
+    gap: 1rem;
+    display: flex;
+    flex-wrap: nowrap;  
+    align-items: end;  
+}
+ 
+.orders-history-container .row.mb-3 > .col-md-3,
+.orders-history-container .row.mb-3 > .col-md-6 {
+    flex: 0 0 auto;
+}
+ 
+.orders-history-container .filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
-.table th {
-    font-weight: 600;
+ 
+.react-datepicker-wrapper,
+.react-datepicker__input-container input {
+    width: 100%;
 }
 
-.table td {
+.react-datepicker-wrapper {
+    flex: 0 0 auto;
+}
+ 
+.react-datepicker-popper {
+    z-index: 1050 !important;
+}
+ 
+.scrollable-table {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 5px;
+}
+ 
+.table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--bg-dark);
+    color: var(--text);
+    text-align: center;
+}
+ 
+.table td, .table th {
     vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.95rem;
+    color: var(--text);
+}
+ 
+.table td:nth-child(2) {
+    text-align: left;
+}
+ 
+.badge.bg-success {
+    background-color: #28a745 !important;
 }
 
-.badge {
-    font-size: 0.85em;
-    padding: 5px 8px;
+.badge.bg-warning.text-dark {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
 }
-
-@media (max-width: 768px) {
-    .table-responsive {
-        overflow-x: auto;
-    }
-    .table td, .table th {
-        white-space: nowrap;
-    }
+ 
+.orders-history-container .row.mb-3 .btn {
+    min-width: 110px;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
-
-
-.pagination .btn-outline-light:hover {
-    background-color: #17a2b8;
-    color: white;
-    border-color: #17a2b8;
+ 
+.pagination .btn {
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-weight: 500;
+    margin: 0 4px;
+    min-width: 40px;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.06);
 }
-
-
-.pagination .btn-info {
-    background-color: #17a2b8 !important;
-    border: none;
-}
-
-
-.pagination .btn-dark:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-
-.pagination .btn-active {
-    background-color: #28a745;   
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    box-shadow: 0 0 6px rgba(40, 167, 69, 0.6);
-    transition: 0.3s ease-in-out;
-}
-
-.pagination .btn-inactive {
-    background-color: transparent;
-    color: #ddd;
-    border: 1px solid #555;
-    transition: 0.3s;
-}
-
-.pagination .btn-inactive:hover {
-    background-color: #444;
-    color: #fff;
-    border-color: #28a745;
-}
-
-
-.pagination .btn-nav {
-    background-color: #007bff;   
+ 
+.btn-nav {
+    background-color: #6c757d;
     color: white;
     border: none;
-    font-weight: bold;
-    transition: 0.3s ease-in-out;
 }
 
-.pagination .btn-nav:hover {
-    background-color: #0056b3;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+.btn-nav:hover {
+    background-color: #5a6268;
+}
+ 
+.btn-active {
+    background-color: var(--accent);
+    color: #212529;  
+    font-weight: 700;
+    border: 1px solid rgba(0,0,0,0.12);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+}
+ 
+.btn-inactive {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.04);
 }
 
-
-.pagination .btn-nav:disabled {
-    background-color: #333;
-    opacity: 0.5;
+.btn-inactive:hover {
+    background: rgba(255,255,255,0.03);
+    color: var(--text);
+}
+ 
+.pagination .btn:disabled,
+.btn-nav:disabled {
+    opacity: 0.6;
     cursor: not-allowed;
+}
+ 
+.pagination .btn:focus {
+    outline: 3px solid rgba(32,201,151,0.18);
+    outline-offset: 2px;
+}
+ 
+@media (max-width: 991px) {
+    .orders-history-container .row.mb-3 {
+        flex-wrap: wrap;
+    }
+    .orders-history-container .filter-buttons {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+    .row .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .pagination .btn {
+        padding: 6px 8px;
+        font-size: 0.85rem;
+        min-width: 36px;
+    }
+}
+ 
+.scrollable-table::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+.scrollable-table::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 4px;
+}
+
+.scrollable-table::-webkit-scrollbar-track {
+    background: transparent;
 }
