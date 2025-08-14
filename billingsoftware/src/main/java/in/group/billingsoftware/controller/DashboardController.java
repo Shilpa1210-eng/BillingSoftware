@@ -1,10 +1,13 @@
 package in.group.billingsoftware.controller;
 import in.group.billingsoftware.io.DashboardResponse;
+import in.group.billingsoftware.io.MonthlySales;
 import in.group.billingsoftware.io.OrderResponse;
+import in.group.billingsoftware.io.WeeklySales;
 import in.group.billingsoftware.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -28,6 +31,16 @@ public class DashboardController {
                 todayOrderCount != null ? todayOrderCount : 0,
                 recentOrders
         );
+    }
+
+    @GetMapping("/monthly-sales")
+    public List<MonthlySales> getMonthlySales(@RequestParam int year) {
+        return orderService.getMonthlySales(year);
+    }
+
+    @GetMapping("/weekly-sales")
+    public List<WeeklySales> getWeeklySales(@RequestParam int year) {
+        return orderService.getWeeklySales(year);
     }
 }
 
